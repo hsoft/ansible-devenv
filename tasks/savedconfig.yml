@@ -1,0 +1,24 @@
+---
+- name: Find the savedconfig
+  find:
+    path: "/etc/portage/savedconfig/{{ pkg.atom|regex_replace('/.*$', '') }}"
+    pattern: "{{ pkg.atom|regex_replace('^.*/', '') }}-*"
+  register: savedconfig_find
+
+- name: Replace it with template
+  template:
+    src: "savedconfig-{{ pkg.atom|replace('/', '_') }}"
+    dest: "{{ (savedconfig_find.files|last).path }}"
+  register: savedconfig
+
+- name: "uninstall {{ pkg.atom }}"
+  portage:
+    package: "{{ pkg.atom }}"
+    state: absent
+  when: "savedconfig|changed"
+
+- name: "reinstall {{ pkg.atom }}"
+  portage:
+    package: "{{ pkg.atom }}"
+    state: present
+  when: "savedconfig|changed"

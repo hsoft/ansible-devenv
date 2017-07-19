@@ -1,0 +1,19 @@
+---
+- hosts: [all, localhost]
+  become: yes
+  tasks:
+    - name: Ensure that /etc/portage/package.use|accept_keywords is a directory
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /etc/portage/package.use
+        - /etc/portage/package.accept_keywords
+
+    - name: Create package.use config files
+      template:
+        src: package.use.j2
+        dest: "/etc/portage/package.use/{{ pkg.atom|replace('/', '_') }}"
+      with_items: "{{ portage_packages }}"
+      loop_control:
+        loop_var: pkg

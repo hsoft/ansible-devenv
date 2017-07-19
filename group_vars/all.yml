@@ -1,0 +1,26 @@
+---
+portage_repos:
+  - name: gentoo
+    default: yes
+    location: /usr/portage
+    sync_type: webrsync
+    auto_sync: yes
+
+  - name: hsoft
+    location: /usr/portage-hsoft
+    sync_type: git
+    sync_uri: https://github.com/hsoft/portage-overlay.git
+    auto_sync: yes
+
+portage_packages:
+  - atom: dev-vcs/git
+    use: -webdav -perl -python
+
+  - atom: app-admin/sudo
+    use: -sendmail
+
+  - atom: x11-terms/st
+    savedconfig: yes
+
+  - atom: x11-wm/dwm
+    savedconfig: yes

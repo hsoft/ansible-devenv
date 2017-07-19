@@ -1,0 +1,10 @@
+{% if repo.default|d(False) %}
+[DEFAULT]
+main-repo = {{ repo.name }}
+{% endif %}
+
+[{{ repo.name }}]
+location = {{ repo.location }}
+sync-type = {{ repo.sync_type }}
+{% if repo.sync_uri|d() %}sync-uri = {{ repo.sync_uri }}{% endif %}
+{% if not repo.auto_sync|d(True) %}auto-sync = no{% endif %}

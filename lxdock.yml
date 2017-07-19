@@ -1,0 +1,7 @@
+name: devenv
+image: gentoo/current
+
+provisioning:
+  - type: ansible
+    playbook: devenv.yml
+    lxd_transport: true
