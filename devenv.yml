@@ -1,5 +1,4 @@
 ---
-- include: package_config.yml
-- include: repos.yml
-- include: packages.yml
+- include: system.yml
+- include: user.yml
 

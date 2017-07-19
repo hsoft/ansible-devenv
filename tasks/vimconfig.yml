@@ -1,0 +1,24 @@
+---
+- name: Ensure vim folders
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - ~/.vim
+    - ~/.vim/pack
+    - ~/.vim/pack/plugins
+    - ~/.vim/pack/plugins/start
+    - ~/.vim/backup
+    - ~/.vim/swap
+    - ~/.vim/undo
+
+- name: Clone plugin repos
+  git:
+    repo: "{{ item.giturl }}"
+    dest: "~/.vim/pack/plugins/start/{{ item.name }}"
+  with_items: "{{ vim_plugins }}"
+
+- name: Generate vimrc
+  template:
+    src: vimrc.j2
+    dest: ~/.vimrc

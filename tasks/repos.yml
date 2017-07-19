@@ -1,0 +1,30 @@
+---
+- name: Install git
+  portage:
+    package: dev-vcs/git
+    state: present
+
+- name: Ensure /etc/portage/repos.conf is a directory
+  file:
+    path: /etc/portage/repos.conf
+    state: directory
+
+- name: Create repos
+  template:
+    src: repos.conf.j2
+    dest: "/etc/portage/repos.conf/{{ repo.name }}"
+  with_items: "{{ portage_repos }}"
+  loop_control:
+    loop_var: repo
+
+- debug:
+    msg: "{{ portage_repos|selectattr('sync_type', 'equalto', 'git')|list }}"
+- name: Ensure that git repos are cloned
+  git:
+    repo: "{{ repo.sync_uri }}"
+    dest: "{{ repo.location }}"
+  with_items: "{{ portage_repos|selectattr('sync_type', 'equalto', 'git')|list }}"
+  loop_control:
+    loop_var: repo
+
+  

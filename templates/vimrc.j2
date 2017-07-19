@@ -1,0 +1,44 @@
+set nocompatible ruler laststatus=2 showcmd showmode number
+set incsearch ignorecase smartcase hlsearch nowrap
+set relativenumber
+set t_Co=256
+syntax enable
+set background=dark
+
+set expandtab
+set shiftwidth=4
+set tabstop=4
+" same as shiftwidth
+set softtabstop=-1
+let NERDSpaceDelims=1
+
+set colorcolumn=100
+
+" http://stackoverflow.com/a/15317146
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
+" http://stackoverflow.com/a/5019111
+set tags=tags;/
+
+" Automatically remote trailing whitespaces on save
+
+autocmd FileType c,python,html,htmldjango,php,javascript,rs,css,scss autocmd BufWritePre <buffer> :%s/\s\+$//e
+" http://stackoverflow.com/a/18671756
+autocmd FileType yaml setlocal sw=2 ts=2 nosmartindent nocindent indentexpr<
+
+" File ignores
+
+set wildignore+=*.pyc,__pycache__,*.o
+
+" key mappings
+
+map <Leader>r :CtrlPBufTag<CR>
+map <Leader>R :CtrlPTag<CR>
+map <F9> :Explore<CR>
+
+" Syntax stuff
+
+let g:syntastic_python_checkers = ['python3', 'pyflakes']
+

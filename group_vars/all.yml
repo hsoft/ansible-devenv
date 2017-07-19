@@ -24,3 +24,24 @@ portage_packages:
 
   - atom: x11-wm/dwm
     savedconfig: yes
+
+  - atom: app-editors/vim
+
+vim_plugins:
+  - name: ctrlp
+    giturl: https://github.com/ctrlpvim/ctrlp.vim.git
+
+  - name: nerdcommenter
+    giturl: https://github.com/scrooloose/nerdcommenter.git
+
+  - name: surround
+    giturl: https://github.com/tpope/vim-surround.git
+
+  - name: syntastic
+    giturl: https://github.com/vim-syntastic/syntastic.git
+
+  - name: lightline
+    giturl: https://github.com/itchyny/lightline.vim.git
+
+  - name: vimwiki
+    giturl: https://github.com/vimwiki/vimwiki.git
