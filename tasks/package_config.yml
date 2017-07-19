@@ -14,3 +14,11 @@
   with_items: "{{ portage_packages|selectattr('use', 'defined')|list }}"
   loop_control:
     loop_var: pkg
+
+- name: Create package.accept_keywords config files
+  template:
+    src: package.accept_keywords.j2
+    dest: "/etc/portage/package.accept_keywords/{{ pkg.atom|replace('/', '_') }}"
+  with_items: "{{ portage_packages|selectattr('keyworded', 'defined')|list }}"
+  loop_control:
+    loop_var: pkg
