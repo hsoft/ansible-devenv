@@ -1,0 +1,14 @@
+---
+- name: Create dmenu_run_custom
+  copy:
+    src: dmenu_run_custom
+    dest: /usr/local/bin/dmenu_run_custom
+    mode: "0755"
+  become: yes
+
+- name: Create ~/.dmenu_choices
+  copy:
+    content: "{{ dmenu_choices|join('\n') }}"
+    dest: ~/.dmenu_choices
+  when: dmenu_choices|d()
+

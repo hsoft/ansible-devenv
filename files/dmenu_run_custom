@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -f ~/.dmenu_choices ]; then
+    dmenu "$@" < ~/.dmenu_choices | ${SHELL:-"/bin/sh"} &
+else
+    dmenu_path | dmenu "$@" | ${SHELL:-"/bin/sh"} &
+fi
