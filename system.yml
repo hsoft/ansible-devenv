@@ -7,3 +7,4 @@
     - include: tasks/package_config.yml
     - include: tasks/repos.yml
     - include: tasks/packages.yml
+    - include: tasks/udev.yml

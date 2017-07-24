@@ -30,6 +30,13 @@ portage_packages:
   - atom: app-emulation/lxd
     keyworded: yes
 
+  # smartcard + opensc is for the yubikey
+  - atom: app-crypt/gnupg
+    use: smartcard
+
+  - atom: dev-libs/opensc
+    use: pcsc-lite
+
 vim_plugins:
   - name: ctrlp
     giturl: https://github.com/ctrlpvim/ctrlp.vim.git
